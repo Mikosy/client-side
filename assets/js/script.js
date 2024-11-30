@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function resetToSignUp() {
         welcomeUserElement.textContent = "Welcome!";
         authButtons.innerHTML = `
-            <a href="../frontView/login.html"
+            <a href="https://node-taskmaster.netlify.app/login.html"
                class="ms-auto btn btn-md rounded-2 py-1 ps-3 pe-3 text-light signup fw-bold">
                Login
             </a>
@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
         clearUserSession();
         // alert("You have been logged out.");
         // window.location.reload(); // Reload to reset UI
-        window.location.href = 'http://127.0.0.1:5500/frontView/login.html';
+        window.location.href = 'https://node-taskmaster.netlify.app/login.html';
     }
 
     // Call the function to display the welcome message on page load
@@ -195,7 +195,7 @@ document.getElementById("createTaskForm").addEventListener("submit", async funct
         const token = localStorage.getItem("jwtToken"); // Retrieve token from localStorage
         if (!token) throw new Error("No token found. User is not authenticated.");
 
-        const response = await fetch("http://localhost:5000/create", {
+        const response = await fetch("https://node-taskmaster-api.onrender.com/create", {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${token}`,
@@ -232,7 +232,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     try {
         // Fetch tasks for the logged-in user from the backend
-        const response = await fetch(`http://localhost:5000/tasks/${userId}`, {
+        const response = await fetch(`https://node-taskmaster-api.onrender.com/tasks/${userId}`, {
             method: 'GET',
             headers: {
                 "Authorization": `Bearer ${localStorage.getItem("jwtToken")}`
@@ -359,7 +359,7 @@ document.querySelectorAll("#taskList").forEach(deleteButton => {
         try {
             const token = localStorage.getItem("jwtToken");
 
-            const response = await fetch(`http://localhost:5000/task/${taskId}`, {
+            const response = await fetch(`https://node-taskmaster-api.onrender.com/task/${taskId}`, {
                 method: "DELETE",
                 headers: {
                     "Authorization": `Bearer ${token}`,
@@ -394,7 +394,7 @@ const userId = localStorage.getItem("userId");
 async function fetchAndDisplayTasks() {
     try {
         // Make a GET request to fetch tasks
-        const response = await fetch(`http://localhost:5000/tasks/assigned/${userId}`);
+        const response = await fetch(`https://node-taskmaster-api.onrender.com/tasks/assigned/${userId}`);
         const data = await response.json();
 
         if (!response.ok) {
@@ -433,10 +433,6 @@ async function fetchAndDisplayTasks() {
                         </p>
                         <p>Status: ${task.status}</p>
                         <p>Due Date: ${new Date(task.dueDate).toLocaleDateString()}</p>
-                        
-
-                        
-
                         </div>
                     </div>
                 </div>

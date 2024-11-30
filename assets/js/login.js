@@ -7,7 +7,7 @@ document.getElementById('loginForm').addEventListener('submit', async (event) =>
 
     try {
         // Make POST request to login the user
-        const response = await fetch('http://localhost:5000/login', {
+        const response = await fetch('https://node-taskmaster-api.onrender.com/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -33,7 +33,7 @@ document.getElementById('loginForm').addEventListener('submit', async (event) =>
 
             // Redirect to dashboard page after a delay
             setTimeout(() => {
-                window.location.href = 'http://127.0.0.1:5500/frontView/index.html';
+                window.location.href = 'https://node-taskmaster.netlify.app/';
             }, 2000);
         } else {
             // Handle login errors

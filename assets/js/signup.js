@@ -18,7 +18,7 @@ document.getElementById('signupForm').addEventListener('submit', async (event) =
 
     try {
         // Make POST request to register the user
-        const response = await fetch('http://localhost:5000/register', {
+        const response = await fetch('https://node-taskmaster-api.onrender.com/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ document.getElementById('signupForm').addEventListener('submit', async (event) =
 
             // Redirect to login page after a delay
             setTimeout(() => {
-                window.location.href = 'http://127.0.0.1:5500/frontView/login.html'; // Replace with your actual login page URL
+                window.location.href = 'https://node-taskmaster.netlify.app/login.html';
             }, 2000);
         } else {
             // Handle errors
