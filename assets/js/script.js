@@ -268,72 +268,38 @@ function displayTasks(tasks) {
         const taskElement = document.createElement("div");
         taskElement.classList.add("task");
         taskElement.innerHTML = `
-
-                <div class="card">
-                <div class="card-header"><h6 class="fw-bold text-light"> ${task.title}</h6></div>
-                    <div class="card-body">
-                        <p>Description: ${task.description}</p>
-                        <p>Assigned Users:
-                        <ul>
-                            ${task.assignedUsers.map(user => `<li>${user.name} (${user.email})</li>`).join('')}
-                        </ul>
-                        </p>
-                        <p>Status: ${task.status}</p>
-                        <p>Due Date: ${task.dueDate}</p>
-                        
-
-                        <div class="edit-and-delete">
-                            <a href="#" class="deleteTask" data-task-id="${task._id}">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                                    class="bi bi-trash-fill text-danger" viewBox="0 0 16 16">
-                                    <path
-                                        d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
-                                </svg>
-                            </a>
-                            <a href="#" class="ms-3" data-bs-toggle="modal" data-bs-target="#editTaskModal">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                                    class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                                </svg>
-                            </a>
-
-                            <div class="modal fade" id="editTaskModal" tabindex="-1" aria-labelledby="editTaskModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                <h5 class="modal-title" id="editTaskModalLabel">Edit Task</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                <form id="editTaskForm">
-                                    <div class="mb-3">
-                                    <label for="title" class="form-label">Task Title</label>
-                                    <input type="text" class="form-control" id="title" required>
-                                    </div>
-                                    <div class="mb-3">
-                                    <label for="description" class="form-label">Description</label>
-                                    <input type="text" class="form-control" id="description" required>
-                                    </div>
-                                    <div class="mb-3">
-                                    <label for="dueDate" class="form-label">Due Date</label>
-                                    <input type="date" class="form-control" id="dueDate" required>
-                                    </div>
-                                    <div class="mb-3">
-                                    <label for="assignedUsers" class="form-label">Assigned Users</label>
-                                    <input type="text" class="form-control" id="assignedUsers" required>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                                </form>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-
-                        </div>
+                <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Descrption</th>
+                    <th scope="col">Assigned Users</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Due Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row"></th>
+                    <td>${task.title}</td>
+                    <td>${task.description}</td>
+                    <td colspan="2">${task.assignedUsers.map(user => `<br>${user.name} (${user.email})`).join('')}</td>
+                    <td>${task.status}</td>
+                    <td>${new Date(task.dueDate).toLocaleDateString()}</td>
+                    <td>
+                    <div class="edit-and-delete">
+                        <a href="#" class="deleteTask" data-task-id="${task._id}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                                class="bi bi-trash-fill text-danger" viewBox="0 0 16 16">
+                                <path
+                                    d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                            </svg>
+                        </a>
                     </div>
-                </div>
-                </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
                 
         `;
         taskListContainer.appendChild(taskElement);
@@ -439,7 +405,6 @@ async function fetchAndDisplayTasks() {
 
             // Task details
             taskElement.innerHTML = `
-
             <table class="table table-striped table-hover">
                 <thead>
                 <tr>
@@ -452,7 +417,7 @@ async function fetchAndDisplayTasks() {
                 </thead>
                 <tbody>
                 <tr>
-                    <th scope="row">1</th>
+                    <th scope="row"></th>
                     <td>${task.title}</td>
                     <td>${task.description}</td>
                     <td colspan="2">${task.assignedUsers.map(user => `<br>${user.name} (${user.email})`).join('')}</td>
