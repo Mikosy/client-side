@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
          <span class="text-light">Your <img src="./assets/images/favico.png" width="58"> TASKMANAGER </span> 
         `;
         authButtons.innerHTML = `
-            <a href="https://node-taskmaster.netlify.app/login.html"
+            <a href="https://taskmaster-capstone.netlify.app/login.html"
                class="ms-auto btn btn-md px-3 text-light signup fw-bold">
                Login
             </a>
@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
         clearUserSession();
         // alert("You have been logged out.");
         // window.location.reload(); // Reload to reset UI
-        window.location.href = 'https://node-taskmaster.netlify.app/login.html';
+        window.location.href = 'https://taskmaster-capstone.netlify.app/login.html';
     }
 
     // Call the function to display the welcome message on page load
