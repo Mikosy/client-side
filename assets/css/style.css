@@ -82,9 +82,10 @@ main .background-image .taskmaster form button {
 }
 
 .task {
-    display: inline-flex;
-    margin-top: 20px;
-    padding-left: 10px;
+    /* display: inline-flex; */
+    margin-top: 10px;
+    width: 100%;
+    /* padding-left: 10px; */
 
 }
 

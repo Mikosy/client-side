@@ -66,3 +66,23 @@ body {
 .svg-part {
     color: #198754;
 }
+
+
+/* container */
+.line-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.line {
+    flex: 1;
+    height: 1px;
+    background-color: #ccc;
+}
+
+.center-icon {
+    margin: 0 15px;
+    width: 40px;
+    height: auto;
+}
