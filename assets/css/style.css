@@ -8,21 +8,50 @@
 
 button,
 .btn {
-    background-color: #198754;
+    background-color: #afce36;
     border-radius: 7px;
-
 }
 
 ::placeholder {
     font-size: .85rem;
 }
 
-main .background-image .navbar {
-    background-color: #000;
+input:focus {
+    border: none;
+    border-bottom: 3px solid #afce36;
+    outline: none;
 }
 
-.signup {
-    background-color: #198754;
+textarea:focus {
+    border: none;
+    border-bottom: 3px solid #afce36;
+    outline: none;
+}
+
+select:focus {
+    border: none;
+    border-bottom: 3px solid #afce36;
+    outline: none;
+}
+
+.logo-text {
+    font-size: 2rem;
+    font-weight: bolder;
+    letter-spacing: -3px;
+    color: #afce36;
+}
+
+main .background-image .navbar {
+    background-color: #ffffff;
+}
+
+small {
+    color: #afce36;
+    font-weight: bold;
+}
+
+h3 {
+    font-weight: bold;
 }
 
 main .taskmaster {
@@ -34,8 +63,8 @@ main .taskmaster {
     height: 100vh;
     width: 100%;
     /* linear-gradient(to top, transparent 10%, black 100%),  */
-    background-image: linear-gradient(to top, transparent 10%, #198754 100%), url(../images/contact-one.jpg);
-    background-size: contain;
+    background-image: linear-gradient(to right, transparent 10%, #2d3801 100%), url(../images/pexels-leeloothefirst-8962462.jpg);
+    background-size: cover;
     background-repeat: no-repeat;
 }
 
@@ -92,4 +121,55 @@ main .background-image .taskmaster form button {
 
 .edit-and-delete a svg {
     color: #fff;
+}
+
+/* Style the file input div */
+.custom-file-upload {
+    border: 2px dashed #007bff;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.custom-file-upload .col-form-label {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.custom-file-upload .form-control {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.custom-file-upload .form-control:hover {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.custom-file-upload.dragover {
+    background-color: #e9f7fe;
+    border-color: #007bff;
+}
+
+.line-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.line {
+    flex: 1;
+    height: 1px;
+    background-color: #ccc;
+}
+
+.center-icon {
+    margin: 0 15px;
+    width: 40px;
+    height: auto;
 }

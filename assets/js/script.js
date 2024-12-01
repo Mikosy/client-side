@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (userPayload && userPayload.name) {
                 // Update welcome message
-                welcomeUserElement.textContent = `Welcome, ${userPayload.name}!`;
+                welcomeUserElement.textContent = `Hello, ${userPayload.name}!`;
 
                 // Replace Sign up button with Logout button
                 authButtons.innerHTML = `
@@ -63,10 +63,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Function to reset to Sign up state
     function resetToSignUp() {
-        welcomeUserElement.textContent = "Welcome!";
+        welcomeUserElement.innerHTML = `
+         <span class="text-light">Your <img src="./assets/images/favico.png" width="58"> TASKMANAGER </span> 
+        `;
         authButtons.innerHTML = `
             <a href="https://node-taskmaster.netlify.app/login.html"
-               class="ms-auto btn btn-md rounded-2 py-1 ps-3 pe-3 text-light signup fw-bold">
+               class="ms-auto btn btn-md px-3 text-light signup fw-bold">
                Login
             </a>
         `;
@@ -244,11 +246,11 @@ document.addEventListener('DOMContentLoaded', async function () {
             displayTasks(data.tasks);
         } else {
             const errorData = await response.json();
-            alert(`Error: ${errorData.error}`);
+            // alert(`Error: ${errorData.error}`);
         }
     } catch (error) {
         console.error('Error fetching tasks:', error);
-        alert('There was an error fetching tasks.');
+        // alert('There was an error fetching tasks.');
     }
 });
 
@@ -345,7 +347,7 @@ document.querySelectorAll("#taskList").forEach(deleteButton => {
     deleteButton.addEventListener("click", async (event) => {
         event.preventDefault(); // Prevent the default action of the anchor tag
 
-        const taskId = event.target.closest('a').getAttribute('data-task-id'); // Get task ID from the data attribute
+        const taskId = event.target.closest('a').getAttribute('data-task-id');
 
         if (!taskId) {
             alert("Task ID not found");
@@ -370,12 +372,15 @@ document.querySelectorAll("#taskList").forEach(deleteButton => {
             const data = await response.json();
 
             if (response.ok) {
-                alert(data.message); // Show success message
+                // Show success message
+                alert(data.message);
                 // Optionally, remove the task element from the DOM
-                const taskElement = event.target.closest('.task'); // Find the task element
-                taskElement.remove(); // Remove the task from the DOM
+                // Find the task element
+                const taskElement = event.target.closest('.task');
+                // Remove the task from the DOM
+                taskElement.remove();
             } else {
-                alert(data.message || "Failed to delete task"); // Show error message
+                alert(data.message || "Failed to delete task");
             }
         } catch (error) {
             console.error("Error deleting task:", error);
@@ -384,13 +389,26 @@ document.querySelectorAll("#taskList").forEach(deleteButton => {
     });
 });
 
-
-
-// Replace with the actual logged-in user's ID
-
-const userId = localStorage.getItem("userId");
+{/* <div class="card">
+    <div class="card-header"><h6 class="fw-bold text-light"> ${task.title}</h6></div>
+    <div class="card-body">
+        <p>Description: ${task.description}</p>
+        <p>Assigned Users:
+            <ul>
+                ${task.assignedUsers.map(user => `<li>${user.name} (${user.email})</li>`).join('')}
+            </ul>
+        </p>
+        <p>Status: ${task.status}</p>
+        <p>Due Date: ${new Date(task.dueDate).toLocaleDateString()}</p>
+    </div>
+</div>
+                </div >
+            </div > */}
 
 // Function to fetch and display tasks
+const userId = localStorage.getItem("userId");
+
+
 async function fetchAndDisplayTasks() {
     try {
         // Make a GET request to fetch tasks
@@ -422,24 +440,27 @@ async function fetchAndDisplayTasks() {
             // Task details
             taskElement.innerHTML = `
 
-            <div class="card">
-                <div class="card-header"><h6 class="fw-bold text-light"> ${task.title}</h6></div>
-                    <div class="card-body">
-                        <p>Description: ${task.description}</p>
-                        <p>Assigned Users:
-                        <ul>
-                            ${task.assignedUsers.map(user => `<li>${user.name} (${user.email})</li>`).join('')}
-                        </ul>
-                        </p>
-                        <p>Status: ${task.status}</p>
-                        <p>Due Date: ${new Date(task.dueDate).toLocaleDateString()}</p>
-                        </div>
-                    </div>
-                </div>
-                </div>
-
-
-               
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Descrption</th>
+                    <th scope="col">Assigned Users</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Due Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>${task.title}</td>
+                    <td>${task.description}</td>
+                    <td colspan="2">${task.assignedUsers.map(user => `<br>${user.name} (${user.email})`).join('')}</td>
+                    <td>${task.status}</td>
+                    <td>${new Date(task.dueDate).toLocaleDateString()}</td>
+                </tr>
+                </tbody>
+            </table>
             `;
 
             // Append to the container
@@ -447,9 +468,31 @@ async function fetchAndDisplayTasks() {
         });
     } catch (error) {
         console.error(error.message);
-        document.getElementById('tasks-container').innerHTML = `<p>Error: ${error.message}</p>`;
+        document.getElementById('tasks-container').innerHTML = `<p>Task(s): ${error.message}</p>`;
     }
 }
 
 // Call the function when the page loads
 fetchAndDisplayTasks();
+
+
+
+
+// file upload
+const fileUploadDiv = document.querySelector('.custom-file-upload');
+
+fileUploadDiv.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    fileUploadDiv.classList.add('dragover');
+});
+
+fileUploadDiv.addEventListener('dragleave', () => {
+    fileUploadDiv.classList.remove('dragover');
+});
+
+fileUploadDiv.addEventListener('drop', (e) => {
+    e.preventDefault();
+    fileUploadDiv.classList.remove('dragover');
+    const files = e.dataTransfer.files;
+    console.log('Files dropped:', files); // Handle files
+});
